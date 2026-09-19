@@ -26,20 +26,20 @@ export default function Login() {
 
   return (
     <form className="panel form auth-box" onSubmit={onSubmit}>
-      <h1>Log in</h1>
-      <p className="muted">Demo user: user@vinylvault.local / User123! · Admin: admin@vinylvault.local / Admin123!</p>
+      <h1>Hyr</h1>
+      <p className="muted">Përdorues demo: user@vinylvault.local / User123! · Admin: admin@vinylvault.local / Admin123!</p>
       {error && <div className="flash error">{error}</div>}
       <label>
         Email
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
       </label>
       <label>
-        Password
+        Fjalëkalimi
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
       </label>
       <div className="row" style={{ marginTop: 16 }}>
-        <button className="btn" type="submit" disabled={busy}>Sign in</button>
-        <Link to="/register">Need an account?</Link>
+        <button className="btn" type="submit" disabled={busy}>Hyr</button>
+        <Link to="/register">Keni nevojë për llogari?</Link>
       </div>
     </form>
   );

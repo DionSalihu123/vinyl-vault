@@ -34,40 +34,40 @@ export default function Challenge() {
 
   return (
     <>
-      <h1>Random Album Challenge</h1>
+      <h1>Sfida e albumit të rastit</h1>
       <p className="muted">
-        Set optional criteria. The Catalog Service picks one matching record at random from catalog_db.
+        Vendos kriteret opsionale. Catalog Service zgjedh një rekord të përshtatshëm rastësisht nga catalog_db.
       </p>
       <form className="panel form" onSubmit={spin} style={{ margin: '20px 0' }}>
         <div className="filters" style={{ marginBottom: 16 }}>
           <label>
-            Genre
+            Zhanri
             <select value={form.genre} onChange={(e) => setForm({ ...form, genre: e.target.value })}>
-              <option value="">Any</option>
+              <option value="">Çdo</option>
               {genres.map((genre) => (
                 <option key={genre} value={genre}>{genre}</option>
               ))}
             </select>
           </label>
           <label>
-            Decade
+            Dekada
             <select value={form.decade} onChange={(e) => setForm({ ...form, decade: e.target.value })}>
-              <option value="">Any</option>
+              <option value="">Çdo</option>
               {[1950, 1960, 1970, 1980, 1990, 2000, 2010].map((decade) => (
                 <option key={decade} value={decade}>{decade}s</option>
               ))}
             </select>
           </label>
           <label>
-            Min price
+            Çmim min
             <input type="number" min="0" step="0.01" value={form.minPrice} onChange={(e) => setForm({ ...form, minPrice: e.target.value })} />
           </label>
           <label>
-            Max price
+            Çmim max
             <input type="number" min="0" step="0.01" value={form.maxPrice} onChange={(e) => setForm({ ...form, maxPrice: e.target.value })} />
           </label>
         </div>
-        <button className="btn" type="submit" disabled={busy}>{busy ? 'Spinning…' : 'Draw an album'}</button>
+        <button className="btn" type="submit" disabled={busy}>{busy ? 'Po rrotullohet…' : 'Zgjidh albumin'}</button>
       </form>
       {error && <div className="flash error">{error}</div>}
       {album && (

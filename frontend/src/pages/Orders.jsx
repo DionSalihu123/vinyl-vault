@@ -28,12 +28,12 @@ export default function Orders() {
 
   return (
     <>
-      <h1>{isAdmin ? 'All orders' : 'Order history'}</h1>
+      <h1>{isAdmin ? 'Të gjitha porositë' : 'Historia e porosive'}</h1>
       <p className="muted">
-        Line items keep the title and unit price from checkout, so later catalog edits do not rewrite history.
+        Artikujt ruajnë titullin dhe çmimin e njësisë nga porosia, kështu që modifikimet e ardhshme të katalogut nuk e rishkruajnë historinë.
       </p>
       {error && <div className="flash error">{error}</div>}
-      {!orders.length && <p>No orders yet.</p>}
+      {!orders.length && <p>Ende nuk ka porosi.</p>}
       {orders.map((order) => (
         <article className="panel" key={order.id} style={{ marginBottom: 16 }}>
           <div className="row" style={{ justifyContent: 'space-between' }}>
@@ -48,11 +48,11 @@ export default function Orders() {
                 <div className="row" style={{ marginTop: 8 }}>
                   {order.status !== 'SHIPPED' && (
                     <button className="btn secondary" type="button" onClick={() => updateStatus(order.id, 'SHIPPED')}>
-                      Mark shipped
+                      Shëno si dërguar
                     </button>
                   )}
                   <button className="btn danger" type="button" onClick={() => updateStatus(order.id, 'CANCELLED')}>
-                    Cancel & restock
+                    Anulo & ricjell stokun
                   </button>
                 </div>
               )}

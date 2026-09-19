@@ -107,11 +107,21 @@ router.post('/cart/items', requireAuth, async (req, res, next) => {
     }
     const album = albums[0];
     if (!album) return res.status(404).json({ error: 'Album not found in catalog' });
-    if (album.stock < quantity) {
-      return res.status(409).json({ error: `Only ${album.stock} copies in stock` });
-    }
 
     const { cart } = await loadCart(req.user.sub);
+    const existing = await pool.query(
+      'SELECT quantity FROM cart_items WHERE cart_id = $1 AND album_id = $2',
+      [cart.id, albumId]
+    );
+    const currentQuantity = existing.rowCount ? Number(existing.rows[0].quantity) : 0;
+    if (currentQuantity + quantity > album.stock) {
+      return res.status(409).json({
+        error: `Only ${album.stock} copies in stock`,
+        available: album.stock,
+        requested: currentQuantity + quantity,
+      });
+    }
+
     await pool.query(
       `INSERT INTO cart_items (cart_id, album_id, quantity)
        VALUES ($1, $2, $3)
@@ -134,6 +144,23 @@ router.patch('/cart/items/:albumId', requireAuth, async (req, res, next) => {
     if (!Number.isInteger(quantity) || quantity < 0) {
       return res.status(400).json({ error: 'quantity must be an integer >= 0' });
     }
+
+    let albums;
+    try {
+      albums = await catalog.getAlbumsByIds([req.params.albumId]);
+    } catch (err) {
+      if (err instanceof catalog.CatalogUnavailableError) {
+        return res.status(503).json({ error: 'Catalog service unavailable; cannot update cart quantity right now' });
+      }
+      throw err;
+    }
+
+    const album = albums[0];
+    if (!album) return res.status(404).json({ error: 'Album not found in catalog' });
+    if (quantity > album.stock) {
+      return res.status(409).json({ error: `Only ${album.stock} copies in stock`, available: album.stock, requested: quantity });
+    }
+
     const { cart } = await loadCart(req.user.sub);
     if (quantity === 0) {
       await pool.query('DELETE FROM cart_items WHERE cart_id = $1 AND album_id = $2', [

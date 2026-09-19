@@ -11,23 +11,23 @@ export default function Layout() {
           Vinyl <span>Vault</span>
         </NavLink>
         <nav className="nav">
-          <NavLink to="/">Catalog</NavLink>
-          <NavLink to="/challenge">Random challenge</NavLink>
-          {user && <NavLink to="/cart">Cart</NavLink>}
-          {user && <NavLink to="/orders">Orders</NavLink>}
+          <NavLink to="/">Katalogu</NavLink>
+          <NavLink to="/challenge">Sfida e rastit</NavLink>
+          {user && <NavLink to="/cart">Shporta</NavLink>}
+          {user && <NavLink to="/orders">Porositë</NavLink>}
           {isAdmin && <NavLink to="/admin">Admin</NavLink>}
           {user ? (
             <>
               <span className="muted">{user.email}</span>
               {isAdmin && <span className="badge">ADMIN</span>}
               <button className="btn secondary" type="button" onClick={logout}>
-                Log out
+                Dil
               </button>
             </>
           ) : (
             <>
-              <NavLink to="/login">Log in</NavLink>
-              <NavLink to="/register">Register</NavLink>
+              <NavLink to="/login">Hyr</NavLink>
+              <NavLink to="/register">Regjistrohu</NavLink>
             </>
           )}
         </nav>

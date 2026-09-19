@@ -26,20 +26,20 @@ export default function Register() {
 
   return (
     <form className="panel form auth-box" onSubmit={onSubmit}>
-      <h1>Create account</h1>
-      <p className="muted">New accounts receive the USER role from the Auth Service.</p>
+      <h1>Krijo llogari</h1>
+      <p className="muted">Llogaritë e reja marrin rolin USER nga Auth Service.</p>
       {error && <div className="flash error">{error}</div>}
       <label>
         Email
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
       </label>
       <label>
-        Password
+        Fjalëkalimi
         <input type="password" minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} required />
       </label>
       <div className="row" style={{ marginTop: 16 }}>
-        <button className="btn" type="submit" disabled={busy}>Register</button>
-        <Link to="/login">Already registered?</Link>
+        <button className="btn" type="submit" disabled={busy}>Regjistrohu</button>
+        <Link to="/login">Tashmë i regjistruar?</Link>
       </div>
     </form>
   );

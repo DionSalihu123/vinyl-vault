@@ -12,7 +12,7 @@ export default function AlbumCard({ album }) {
         </h3>
         <div className="meta">{album.artist}</div>
         <div className="meta">
-          {album.genre} · {album.releaseYear} · {album.stock} in stock
+          {album.genre} · {album.releaseYear} · {album.stock} në stok
         </div>
         <div className="price">${album.price.toFixed(2)}</div>
       </div>
